@@ -1,7 +1,13 @@
 #!/bin/env bash
 
-### Made by Ampflower ###
+# Copyright 2023 Ampflower
+#
+# This software is subject to the terms of the Zlib License.
+# If a copy was not distributed with this file, you can obtain one at
+# https://github.com/Ampflower/PrideShell/blob/main/LICENSE
+#
 # Source: https://github.com/Ampflower/PrideShell
+# SPDX-License-Identifier: Zlib
 
 # All the flags to choose from.
 

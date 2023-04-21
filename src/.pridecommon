@@ -1,0 +1,84 @@
+#!/bin/env sh
+
+### Made by Ampflower ###
+# Source: https://github.com/Ampflower/PrideShell
+
+# All the flags to choose from.
+
+__pride_rainbow="0xE40203 0xFE8D00 0xFFED00 0x008025 0x004DFF 0x750787"
+__pride_gay="0x3F685B 0x7EC181 0xFFFFFF 0x63BBCB 0x033657"
+__pride_lesbian="0xD52D00 0xFF9A56 0xFFFFFF 0xD362A4 0xA30262"
+__pride_plural="0x31C69E 0x347DDE 0x6B3FBD 0x000000"
+__pride_trans="0x5BCEFA 0xF5A9B8 0xFFFFFF 0xF5A9B8 0x5BCEFA"
+__pride_demi_girl1="0x7F7F7F 0xC4C4C4 0xFEAFC9 0xFFFFFF 0xFEAFC9 0xC4C4C4 0x7F7F7F"
+__pride_demi_girl2="0xC000E4 0xE0B9FB 0xFCC3F1 0xF8F0FC 0xEFA2D2 0xE86699 0x935E92"
+__pride_demi_boy1="0x7F7F7F 0xC4C4C4 0x9AD9EB 0xFFFFFF 0x9AD9EB 0xC4C4C4 0x7F7F7F"
+__pride_demi_boy2="0x027BE4 0xB9D8FD 0xC1F3FE 0xF2FDF0 0xA0A9EF 0xA193E5 0x685F92"
+__pride_demi_gender="0x7F7F7F 0xC4C4C4 0xFAFF74 0xFFFFFF 0xFAFF74 0xC4C4C4 0x7F7F7F"
+__pride_bi_gender="0x6992D9 0x92C2E8 0xFFFFFF 0xC4A4EA 0xFFFFFF 0xF8ABC5 0xED7AA8"
+__pride_genderfluid="0xE948A1 0xFFFFFF 0xAD00DE 0x343434 0x5643ED"
+__pride_genderqueer="0xB562D9 0xFFFFFF 0x578D3B"
+__pride_agender="0x000000 0xB9B9B9 0xFFFFFF 0xB8F482 0xFFFFFF 0xB9B9B9 0x000000"
+__pride_aroace="0xE38C01 0xECCD00 0xFFFFFF 0x62AEDF 0x203857"
+__pride_aro="0x3CA542 0xA7D379 0xFFFFFF 0xA9A9A9 0x000000"
+__pride_ace="0x000000 0xA3A3A3 0xFFFFFF 0x7F007F"
+__pride_bisexual="0xD60270 0x9A4F96 0x0039A9"
+__pride_intersex="0xFFC901 0xFFC901 0x9A00FF 0xFFC901 0x9A00FF 0xFFC901 0xFFC901"
+__pride_enbee="0xFAF533 0xFDFDFD 0x9C58D1 0x2C2C2C"
+__pride_pineapple="0xFF7200 0xFF7200 0x000000 0xFF7200 0x000000 0xFF7200 0xFF7200"
+__pride_proxyfox="0x2D3131 0xE8DACA 0xFD8803 0x2D3131 0xFD8803 0xE9CA9A 0x97594D"
+
+# Creates a pride "array" for Ash and Dash.
+#
+# @field $1   = Length of the array
+# @field $1_* = Values of the array
+# @field $1_d = The divider for the array
+#
+# @param $1 The array to split
+# @param $2 The field to set
+# @param $3 The divider
+__pride_array () { local i=0; for p in $1; do eval "$2_$i=$p"; local _=$((i+=1)); done; eval "$2=$i;$2_d=$3"; }
+
+# Pride flags; alternatively declare your array directly.
+# Note: It is array as string followed by variable then divider.
+__pride_array "$__pride_rainbow" __pride_1 1
+__pride_array "$__pride_rainbow" __pride_2 2
+__pride_array "$__pride_trans" __pride_3 1
+
+# " #", " $" and ">" works as well
+__pride_end=" &"
+
+
+
+### Internals from here on ###
+
+__pride_i=0
+HOSTNAME=$(hostname)
+__pride_len=$((${#USER} + ${#HOSTNAME} + 6))
+
+__pride_colour () {
+	local r=$((($1 >> 16 & 255) / $2))
+	local g=$((($1 >> 8  & 255) / $2))
+	local b=$((($1       & 255) / $2))
+	# echo -ne "\e[38;2;$r;$g;${b}m"
+
+	# Dash doesn't have an enhanced echo.
+	printf "\033[38;2;%s;%s;%sm" "$r" "$g" "$b"
+}
+
+__pride_prompt () {
+	lastExit="$?"
+	eval "local c1=\$__pride_1_$((__pride_i % __pride_1))"
+	eval "local c2=\$__pride_2_$((__pride_i % __pride_2))"
+	eval "local c3=\$__pride_3_$((__pride_i % __pride_3))"
+	local _=$((__pride_i+=1))
+
+	local a1=$(__pride_colour "$c1" __pride_1_d)
+	local a2=$(__pride_colour "$c2" __pride_2_d)
+	local a3=$(__pride_colour "$c3" __pride_3_d)
+
+	__pride_print "$a1" "$a2" "$a3"
+
+	return $lastExit
+}
+

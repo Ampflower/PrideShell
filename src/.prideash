@@ -1,0 +1,19 @@
+#!/bin/env ash
+
+### Made by Ampflower ###
+# Source: https://github.com/Ampflower/PrideShell
+
+if [ -n "$__pride_home" ]; then
+	. $__pride_home/.pridecommon
+else
+	. ~/.pridecommon
+fi
+
+__pride_print () {
+	local location=${PWD/~/\~}
+	local len=$((${#location} + ${#__pride_end} + __pride_len))
+
+	echo -en "[\[$1\]\u\[\e[m\]@\[$2\]\h\[\e[m\]] \[$3\]\w\[\e[m\]$__pride_end \[\e[s\e[32767C\e[$((${#?}+2))D[\e[31m$?\e[m]\e[${len}G\e[u\]"
+}
+
+PS1='\[\e]0;\u@\h:\w\e\\\\\]$(__pride_prompt)\[\e]7;$((__pride_i++))\e\\\\\]'

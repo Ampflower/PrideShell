@@ -1,0 +1,26 @@
+#!/bin/env dash
+
+### Made by Ampflower ###
+# Source: https://github.com/Ampflower/PrideShell
+
+if [ -n "$__pride_home" ]; then
+	. $__pride_home/.pridecommon
+else
+	. ~/.pridecommon
+fi
+
+__pride_print () {
+	local location=${PWD#~}
+    if [ "$PWD" != "$location" ]; then location="~$location"; fi
+	local len=$((${#location} + ${#__pride_end} + __pride_len))
+
+	printf '\033]0;%s@%s:%s\033\\[%s%s\033[m@%s%s\033[m] %s%s\033[m%s \033[s\033[32767C\033[%sD[\033[31m%s\033[m]\033[%sG\033[u\033]7;' \
+    		"$USER" "$HOSTNAME" "$location" "$1" "$USER" "$2" "$HOSTNAME" "$3" "$location" "$__pride_end" "$((${#lastExit}+2))" "$lastExit" "$len"
+}
+
+# Minor
+__pride_esc=$(printf "\033")
+
+# shellcheck disable=SC2025
+# shellcheck disable=SC1003
+PS1='$(__pride_prompt)$((__pride_i+=1))$__pride_esc\\'

@@ -52,7 +52,6 @@ __pride_end=" &"
 ### Internals from here on ###
 
 __pride_i=0
-HOSTNAME=$(hostname)
 __pride_len=$((${#USER} + ${#HOSTNAME} + 8))
 
 # The substitutions here are intended to be handled by the prompt handler.

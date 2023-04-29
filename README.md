@@ -118,6 +118,45 @@ The following variables are available for configuration:
 | `$__pride_3_d` | Path Flag's lightness divider (default: `1`)     |
 | `$__pride_end` | End of the prompt (default: `" &"`)              |
 
+### Fish
+
+
+#### Configuring
+
+To set a flag of your liking, you can directly set the variable `__pride_X` with X being the integer.
+You may also set the lightness divider with `__pride_X_d` to any value you like.
+
+An example setting the lesbian flag with half the lightness on path:
+
+```fish
+# Sets the lesbian flag at variable 3 (path)
+set __pride_3 $__pride_lesbian
+
+# Sets half lightness on path
+set __pride_3_d 2
+```
+
+You may optionally set the end of the prompt to any character like `$` with the following:
+
+```fish
+# Sets the prompt to end with `$` so it emits `[user@host] ~ $ `
+set __pride_end ' $'
+```
+
+#### Variables
+
+The following variables are available for configuration:
+
+| Name          | Purpose                                          |
+|---------------|--------------------------------------------------|
+| `__pride_1`   | Username Flag (default: `$__pride_rainbow`)      |
+| `__pride_2`   | Hostname Flag (default: `$__pride_rainbow`)      |
+| `__pride_3`   | Path Flag (default: `$__pride_trans`)            |
+| `__pride_1_d` | Username Flag's lightness divider (default: `1`) |
+| `__pride_2_d` | Hostname Flag's lightness divider (default: `2`) |
+| `__pride_3_d` | Path Flag's lightness divider (default: `1`)     |
+| `__pride_end` | End of the prompt (default: `" &"`)              |
+
 ## Available Flags
 
 ```

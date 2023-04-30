@@ -60,7 +60,8 @@ if($null -eq $env:USER) {
 
 # Caches the hostname for the entire session
 # Note, toLower is ran after to fix the hostname from Windows.
-$Global:HostName=$(hostname).toLower()
+# `uname -n` is for Linux; tried first as that's likely to be installed.
+$Global:HostName=$(try { uname -n } catch { hostname }).toLower()
 # Pride increment.
 $Global:__pride_i=0
 

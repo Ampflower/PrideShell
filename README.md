@@ -6,6 +6,7 @@ A UNIX-style shell prompt for POSIX shells and PowerShell with a flare of pride.
 
  - Add `. ~/.pride<shell>` for your shell in your shell's `.rc` or profile file.
    - For `ash` and `dash` shells: If your dotfiles are not at home, set `__pride_home` to the directory before calling.
+   - For `fish`, see [Fish#Setup](#fish)
  - Optionally configure your prompt for what you want.
 
 ## Configuring Shells
@@ -120,6 +121,15 @@ The following variables are available for configuration:
 
 ### Fish
 
+#### Setup
+
+To set up PrideShell, you'll need to drop `pride.fish` in `~/.config/fish/conf.d/`,
+or source using `. ~/.pride.fish` in your rc file at `~/.config/fish/config.fish`.
+
+A few things of note for `/conf.d/`:
+ - You must not have a `.` at the beginning of the file name.
+ - You must have the `.fish` extension.
+ - It must not be a symbolic link
 
 #### Configuring
 

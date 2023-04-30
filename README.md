@@ -11,7 +11,7 @@ A UNIX-style shell prompt for POSIX shells and PowerShell with a flare of pride.
 
 ## Configuring Shells
 
-### Bash
+### Bash & Zsh
 
 #### Configuring
 

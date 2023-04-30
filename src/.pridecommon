@@ -59,7 +59,9 @@ __pride_end=" &"
 ### Internals from here on ###
 
 __pride_i=0
-HOSTNAME=$(uname -n || hostname)
+if [ -z "$HOSTNAME" ]; then
+	HOSTNAME=$(uname -n || hostname)
+fi
 __pride_len=$((${#USER} + ${#HOSTNAME} + 6))
 
 __pride_colour () {
